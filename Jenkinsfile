@@ -3,21 +3,44 @@ pipeline {
 
     environment {
         FLUTTER_HOME = "D:\\Softwares\\flutter"
-        ANDROID_HOME = "C:\\Users\\ankul\\AppData\\Local\\Android\\Sdk"
-        PATH = "${FLUTTER_HOME}\\bin;${ANDROID_HOME}\\platform-tools;${PATH}"
+        ANDROID_SDK_ROOT = "C:\\Users\\ankul\\AppData\\Local\\Android\\Sdk"
+        PATH = "${FLUTTER_HOME}\\bin;${ANDROID_HOME}\\platform-tools;${env.PATH}"
     }
 
     stages {
-        stage('Clone Repository') {
+         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ashwin9099/flutter-mealApp.git'
+                checkout scm
             }
         }
 
-        stage('Setup Flutter') {
+        stage('Flutter Clean') {
             steps {
-                sh 'flutter doctor'
-                sh 'flutter pub get'
+                bat 'flutter clean'
+            }
+        }
+
+        stage('Flutter Packages Get') {
+            steps {
+                bat 'flutter pub get'
+            }
+        }
+
+        stage('Flutter Test') {
+            steps {
+                bat 'flutter test'
+            }
+        }
+
+        stage('Flutter Analyze') {
+            steps {
+                bat 'flutter analyze'
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ashwin9099/flutter-mealApp.git'
             }
         }
 

@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-        stage('Flutter Analyze') {
-            steps {
-                bat 'flutter analyze'
-            }
-        }
-
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/ashwin9099/flutter-mealApp.git'

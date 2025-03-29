@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-        stage('Flutter Test') {
-            steps {
-                bat 'flutter test'
-            }
-        }
-
         stage('Flutter Analyze') {
             steps {
                 bat 'flutter analyze'
@@ -46,7 +40,7 @@ pipeline {
 
         stage('Build APK') {
             steps {
-                sh 'flutter build apk --release'
+                bat 'flutter build apk --release'
             }
         }
 

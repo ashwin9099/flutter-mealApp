@@ -35,12 +35,14 @@ pipeline {
         stage('Build APK') {
             steps {
                 bat 'flutter build apk --release'
+                //rename the apk:
+                bat 'rename "build\\app\\outputs\\flutter-apk\\app-release.apk" "Meals.apk"'
             }
         }
 
         stage('Archive APK') {
             steps {
-                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/app-release.apk', fingerprint: true
+                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/Meals.apk', fingerprint: true
             }
         }
     }
